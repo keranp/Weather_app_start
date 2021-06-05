@@ -18,7 +18,7 @@
         <input type="submit" value="Submit">
       </form>
       <div class="card" style="width: 18rem;">
-        <img src="images/world.jpg" alt="picture" class="world" />
+        <img src="images/world.jpg" alt="picture" class="world" id="icon" />
         <div class="card-body">
           <h1 class="city"></h1>
           <h2 class="temp"></h2>
@@ -33,6 +33,7 @@
           <a href="" class="farenheit">farenheit</a>
         </div>
       </div>
+      <a href="https://github.com/keranp/Weather_app_start" class="github">Coded by Keran</a>
 
     <script>
 
@@ -48,6 +49,7 @@ function showCity(event) {
 
       function currentTemp(response) {
         let temp = Math.round(response.data.main.temp);
+        celsiusTemp = response.data.main.temp;
         let h2 = document.querySelector("h2");
         h2.innerHTML = "It is " + temp + " degrees"
         let description = response.data.weather[0].description;
@@ -59,22 +61,26 @@ function showCity(event) {
         let humidity = response.data.main.humidity;
         let humid = document.querySelector("#humidity");
         humid.innerHTML = "Humidity: " + humidity + "%"
+        let icon = document.querySelector("#icon");
+        icon.setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.weather[0].icon + "@2x.png")
     }
 
-    function showCelsius() {
+    function showCelsius(event) {
         event.preventDefault();
-        let temp = Math.round(response.data.main.temp);
+        let temp = celsiusTemp;
         let h2 = document.querySelector("h2");
         h2.innerHTML = "It is " + temp + " degrees celsius"
       }
 
-      function showFarenheit() {
+      function showFarenheit(event) {
         event.preventDefault();
-        let temp = Math.round(((response.data.main.temp) - 30) / 2);
+        let temp = (celsiusTemp * 9) / 5 + 32;
         let h2 = document.querySelector("h2");
         h2.innerHTML = "It is " + temp + " degrees farenheit"
       }
 
+      let celsiusTemp = null;
+      
       let cityForm = document.querySelector("#city-form");
       cityForm.addEventListener("submit", showCity);
 
