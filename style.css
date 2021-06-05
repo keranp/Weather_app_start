@@ -1,0 +1,11 @@
+.world {
+    width: 500;
+    display: block;
+    margin: 20px auto;
+}
+
+form {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
